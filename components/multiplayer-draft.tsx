@@ -180,7 +180,7 @@ export function MultiplayerDraft({ roomId, playerId, playerNumber, onLeave }: Mu
 
         // Initialize Battle immediately for Solo
         updatedRoom = initializeBattle(updatedRoom)
-        updatedRoom = startTurn(updatedRoom) // Start P1 turn
+        // Don't call startTurn here - battle starts with STARTING_ENERGY
       }
     } else {
       updatedRoom.team2 = teamSlots
@@ -198,7 +198,7 @@ export function MultiplayerDraft({ roomId, playerId, playerNumber, onLeave }: Mu
       if (p1Ready && p2Ready) {
         console.log('[v0] Both teams ready! Initializing battle...')
         updatedRoom = initializeBattle(updatedRoom)
-        updatedRoom = startTurn(updatedRoom)
+        // Don't call startTurn here - battle starts with STARTING_ENERGY
       } else {
         console.log('[v0] Waiting for opponent...')
         toast({
