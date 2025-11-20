@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast'
 import { Loader2 } from 'lucide-react'
 import { DeckBuilder } from './deck-builder'
 import { BattleBoard } from './battle-board'
-import { initializeBattle, startTurn, playCard, attackUnit, attackFace, endTurn } from '@/lib/battle-engine'
+import { initializeBattle, startTurn, playCard, attackUnit, attackFace, endTurn, getStatsForCharacter } from '@/lib/battle-engine'
 import { calculateAiMove } from '@/lib/ai-opponent'
 
 interface MultiplayerDraftProps {
@@ -24,6 +24,7 @@ export function MultiplayerDraft({ roomId, playerId, playerNumber, onLeave }: Mu
   const [gameRoom, setGameRoom] = useState<GameRoom | null>(null)
   const [isAiMode, setIsAiMode] = useState(false)
   const [isWaiting, setIsWaiting] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false) // Prevent rapid actions
   const supabase = createClient()
   const { toast } = useToast()
 
@@ -258,10 +259,55 @@ export function MultiplayerDraft({ roomId, playerId, playerNumber, onLeave }: Mu
   }
 
   const handlePlayCard = async (cardId: string) => {
-    if (!gameRoom) return
+    if (!gameRoom || isProcessing) return
 
+    // Validate we have enough energy BEFORE attempting to play
+    const isP1 = playerNumber === 1
+    const currentEnergy = isP1 ? gameRoom.p1_energy : gameRoom.p2_energy
+    const hand = isP1 ? gameRoom.p1_hand : gameRoom.p2_hand
+    const board = isP1 ? gameRoom.p1_board : gameRoom.p2_board
+
+    const card = hand.find(c => c.id === cardId)
+    if (!card) {
+      console.error('[PlayCard] Card not found in hand')
+      return
+    }
+
+    const stats = getStatsForCharacter(card)
+
+    // Validate energy cost
+    if (currentEnergy < stats.cost) {
+      toast({
+        title: "Not Enough Haki!",
+        description: `This card costs ${stats.cost} Haki, but you only have ${currentEnergy}.`,
+        variant: "destructive"
+      })
+      return
+    }
+
+    // Validate board space
+    if (board.length >= 6) {
+      toast({
+        title: "Board Full!",
+        description: "You can only have 6 units on the board.",
+        variant: "destructive"
+      })
+      return
+    }
+
+    setIsProcessing(true)
     const previousRoom = { ...gameRoom }
     const newRoom = playCard(gameRoom, playerNumber, cardId)
+
+    // Double-check that energy was actually deducted (safety check)
+    const newEnergy = isP1 ? newRoom.p1_energy : newRoom.p2_energy
+    if (newEnergy === currentEnergy) {
+      // Card wasn't played (battle engine rejected it)
+      console.error('[PlayCard] Battle engine rejected card play')
+      setIsProcessing(false)
+      return
+    }
+
     setGameRoom(newRoom)
 
     const { error } = await supabase.from('game_rooms').update(newRoom).eq('id', gameRoom.id)
@@ -275,6 +321,8 @@ export function MultiplayerDraft({ roomId, playerId, playerNumber, onLeave }: Mu
       })
       setGameRoom(previousRoom)
     }
+
+    setIsProcessing(false)
   }
 
   const handleEndTurn = async () => {
