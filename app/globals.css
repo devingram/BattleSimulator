@@ -1,0 +1,50 @@
+/* All colors as hex for html2canvas export compatibility - no oklch or oklab */
+@import 'tailwindcss';
+/* Removed tw-animate-css import that contains oklab colors */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: #0a0118;
+  --color-foreground: #fafafa;
+  --color-card: #1a1229;
+  --color-card-foreground: #fafafa;
+  --color-popover: #120d1f;
+  --color-popover-foreground: #fafafa;
+  --color-primary: #9d5cdb;
+  --color-primary-foreground: #fafafa;
+  --color-secondary: #2a1f3d;
+  --color-secondary-foreground: #fafafa;
+  --color-muted: #2d2440;
+  --color-muted-foreground: #8b8594;
+  --color-accent: #e85d9f;
+  --color-accent-foreground: #fafafa;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #fafafa;
+  --color-border: #2a1f3d;
+  --color-input: #2d2440;
+  --color-ring: #9d5cdb;
+  --color-chart-1: #9d5cdb;
+  --color-chart-2: #e85d9f;
+  --color-chart-3: #5ba3d0;
+  --color-chart-4: #84cc16;
+  --color-chart-5: #f59e0b;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply outline-ring/50;
+    border-color: #2a1f3d;
+  }
+
+  body {
+    background-color: #0a0118;
+    color: #fafafa;
+  }
+}

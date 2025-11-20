@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Goku",
+    "role": "Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Vegeta",
+    "role": "Vice Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Naruto",
+    "role": "Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Sasuke",
+    "role": "Vice Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Luffy",
+    "role": "Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Zoro",
+    "role": "Vice Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Ichigo",
+    "role": "Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Renji",
+    "role": "Vice Captain",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "All Might",
+    "role": "Tank",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Endeavor",
+    "role": "Tank",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Piccolo",
+    "role": "Tank",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Rock Lee",
+    "role": "Tank",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Sakura",
+    "role": "Healer",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Orihime",
+    "role": "Healer",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Chopper",
+    "role": "Healer",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Recovery Girl",
+    "role": "Healer",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Shikamaru",
+    "role": "Support",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Usopp",
+    "role": "Support",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Edward Elric",
+    "role": "Support",
+    "image": "/placeholder.svg?height=400&width=400"
+  },
+  {
+    "name": "Alphonse Elric",
+    "role": "Support",
+    "image": "/placeholder.svg?height=400&width=400"
+  }
+]
